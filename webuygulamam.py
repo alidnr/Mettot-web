@@ -20,7 +20,6 @@ img_base64 = get_base64(FOTOGRAF_ADI)
 # --- TASARIM (CSS) ---
 st.markdown(f"""
     <style>
-    /* Streamlit öğelerini gizle */
     header, footer, .stDeployButton {{visibility: hidden !important;}}
     .block-container {{padding: 0px !important; margin: 0px !important;}}
     
@@ -31,28 +30,25 @@ st.markdown(f"""
         background-repeat: no-repeat;
         height: 100vh;
         width: 100vw;
-        display: flex;
-        align-items: center;
-        justify-content: center;
     }}
 
-    /* Karartma katmanı */
     .stApp::before {{
         content: "";
         position: absolute;
         top: 0; left: 0; width: 100%; height: 100%;
-        background-color: rgba(0, 0, 0, 0.4);
+        background-color: rgba(0, 0, 0, 0.3);
         z-index: 0;
     }}
 
     /* ANA KONTEYNER */
     .main-container {{
-        z-index: 10;
+        position: absolute;
         width: 100%;
+        z-index: 10;
         display: flex;
         flex-direction: column;
         align-items: center;
-        padding: 20px;
+        text-align: center;
     }}
 
     .mettot-header {{
@@ -60,39 +56,44 @@ st.markdown(f"""
         font-family: 'Courier New', Courier, monospace;
         font-weight: bold;
         text-shadow: 2px 2px 10px rgba(0,0,0,1);
-        text-align: center;
-        margin-bottom: 25px;
     }}
 
     .my-button {{
-        background-color: rgba(0, 0, 0, 0.6); /* Butonları biraz daha belirgin yaptık */
+        background-color: rgba(0, 0, 0, 0.7);
         color: white !important;
-        border: 1px solid rgba(255,255,255,0.5);
-        border-radius: 8px;
+        border: 1.5px solid white;
+        border-radius: 10px;
         text-decoration: none !important;
         font-weight: bold;
-        text-align: center;
         transition: 0.3s;
-        display: block;
-        margin: 8px 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 8px auto;
     }}
 
     /* BİLGİSAYAR AYARI */
     @media (min-width: 769px) {{
-        .mettot-header {{ font-size: 70px; }}
-        .my-button {{ font-size: 20px; padding: 15px 40px; width: 300px; }}
+        .main-container {{ top: 50%; transform: translateY(-50%); }}
+        .mettot-header {{ font-size: 70px; margin-bottom: 30px; }}
+        .my-button {{ font-size: 22px; padding: 15px 40px; width: 300px; }}
     }}
 
-    /* MOBİL AYARI - Her şeyi aşağı kaydırdık ve küçülttük */
+    /* MOBİL AYARI - BAŞLIĞI GÖRÜNÜR YAPMA */
     @media (max-width: 768px) {{
-        .main-container {{
-            margin-top: -100px; /* İçeriği biraz yukarı veya aşağı almak için burayı değiştirebilirsin */
+        .main-container {{ 
+            top: 15%; /* Başlığı ekranın üstünden %15 aşağı çektik, çentiğe takılmaz */
         }}
-        .mettot-header {{ font-size: 40px; }}
+        .mettot-header {{ 
+            font-size: 38px; 
+            margin-bottom: 15px; /* Başlık ile buton arasını daralttık */
+            display: block !important;
+            visibility: visible !important;
+        }}
         .my-button {{ 
-            font-size: 16px; 
-            padding: 14px 0; 
-            width: 85%; /* Butonlar ekrana daha iyi yayılır */
+            font-size: 17px; 
+            padding: 12px 0; 
+            width: 80%; 
         }}
     }}
     </style>
