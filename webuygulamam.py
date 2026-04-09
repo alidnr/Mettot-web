@@ -20,22 +20,21 @@ img_base64 = get_base64(FOTOGRAF_ADI)
 # --- TASARIM (CSS) ---
 st.markdown(f"""
     <style>
+    /* Gereksiz her şeyi kaldır */
     header, footer, .stDeployButton {{visibility: hidden !important;}}
     .block-container {{padding: 0px !important; margin: 0px !important;}}
     
     .stApp {{
         background-image: url("data:image/jpeg;base64,{img_base64}");
         background-size: cover;
-        background-position: center;
+        background-position: center center;
         background-repeat: no-repeat;
         height: 100vh;
         width: 100vw;
         overflow: hidden;
-        display: flex;
-        align-items: center; /* Dikeyde tam merkezle */
-        justify-content: center; /* Yatayda tam merkezle */
     }}
 
+    /* Arka plan karartması */
     .stApp::before {{
         content: "";
         position: absolute;
@@ -44,10 +43,14 @@ st.markdown(f"""
         z-index: 0;
     }}
 
-    /* ANA KONTEYNER */
+    /* ANA KONTEYNER - EKRANIN TAM ORTASINA SABİTLEME */
     .main-container {{
-        z-index: 10;
+        position: fixed; /* Akıştan bağımsız, ekrana sabit */
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%); /* Tam matematiksel merkez */
         width: 100%;
+        z-index: 10;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -59,6 +62,7 @@ st.markdown(f"""
         font-family: 'Courier New', Courier, monospace;
         font-weight: bold;
         text-shadow: 2px 2px 15px rgba(0,0,0,1);
+        margin-bottom: 25px;
     }}
 
     .my-button {{
@@ -77,16 +81,15 @@ st.markdown(f"""
 
     /* BİLGİSAYAR AYARI */
     @media (min-width: 769px) {{
-        .mettot-header {{ font-size: 75px; margin-bottom: 35px; }}
-        .my-button {{ font-size: 22px; padding: 16px 45px; width: 320px; }}
+        .mettot-header {{ font-size: 75px; }}
+        .my-button {{ font-size: 22px; padding: 15px 45px; width: 320px; }}
     }}
 
-    /* MOBİL AYARI - TAM MERKEZ VE PROFESYONEL ÖLÇEK */
+    /* MOBİL AYARI - TAM ORTALANMIŞ GÖRÜNTÜ */
     @media (max-width: 768px) {{
         .mettot-header {{ 
             font-size: 42px; 
-            margin-bottom: 25px;
-            letter-spacing: 1px;
+            margin-bottom: 20px;
         }}
         .my-button {{ 
             font-size: 18px; 
@@ -98,7 +101,7 @@ st.markdown(f"""
 
     <div class="main-container">
         <div class="mettot-header">< METTOT ></div>
-        <a href="https://open.spotify.com/artist/your_id" target="_blank" class="my-button">Spotify</a>
+        <a href="https://spotify.com" target="_blank" class="my-button">Spotify</a>
         <a href="https://www.instagram.com/enessjordan" target="_blank" class="my-button">Instagram</a>
         <a href="https://youtube.com/@mettot-sx" target="_blank" class="my-button">YouTube</a>
     </div>
