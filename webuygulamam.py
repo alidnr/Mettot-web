@@ -20,7 +20,7 @@ img_base64 = get_base64(FOTOGRAF_ADI)
 # --- TASARIM (CSS) ---
 st.markdown(f"""
     <style>
-    /* Gereksiz her şeyi kaldır */
+    /* Streamlit varsayılanlarını gizle */
     header, footer, .stDeployButton {{visibility: hidden !important;}}
     .block-container {{padding: 0px !important; margin: 0px !important;}}
     
@@ -34,7 +34,7 @@ st.markdown(f"""
         overflow: hidden;
     }}
 
-    /* Arka plan karartması */
+    /* Arka plan karartma */
     .stApp::before {{
         content: "";
         position: absolute;
@@ -43,12 +43,12 @@ st.markdown(f"""
         z-index: 0;
     }}
 
-    /* ANA KONTEYNER - EKRANIN TAM ORTASINA SABİTLEME */
+    /* ANA KONTEYNER - TAM ORTALAMA */
     .main-container {{
-        position: fixed; /* Akıştan bağımsız, ekrana sabit */
+        position: fixed;
         top: 50%;
         left: 50%;
-        transform: translate(-50%, -50%); /* Tam matematiksel merkez */
+        transform: translate(-50%, -50%);
         width: 100%;
         z-index: 10;
         display: flex;
@@ -85,7 +85,7 @@ st.markdown(f"""
         .my-button {{ font-size: 22px; padding: 15px 45px; width: 320px; }}
     }}
 
-    /* MOBİL AYARI - TAM ORTALANMIŞ GÖRÜNTÜ */
+    /* MOBİL AYARI */
     @media (max-width: 768px) {{
         .mettot-header {{ 
             font-size: 42px; 
@@ -101,7 +101,7 @@ st.markdown(f"""
 
     <div class="main-container">
         <div class="mettot-header">< METTOT ></div>
-        <a href="https://spotify.com" target="_blank" class="my-button">Spotify</a>
+        <a href="https://open.spotify.com/artist/6xi4UQoVjPLTld9Fu12736?si=xne1GWFqQQeQaEJV5alviQ" target="_blank" class="my-button">Spotify</a>
         <a href="https://www.instagram.com/enessjordan" target="_blank" class="my-button">Instagram</a>
         <a href="https://youtube.com/@mettot-sx" target="_blank" class="my-button">YouTube</a>
     </div>
