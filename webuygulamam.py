@@ -4,7 +4,7 @@ import base64
 # --- SAYFA AYARLARI ---
 st.set_page_config(page_title="Mettot-Sx", layout="wide")
 
-# --- ARKA PLAN FOTOĞRAFI FONKSİYONU ---
+# --- ARKA PLAN FOTOĞRAFI ---
 FOTOGRAF_ADI = "image_9.png.jpeg"
 
 def get_base64(bin_file):
@@ -20,6 +20,7 @@ img_base64 = get_base64(FOTOGRAF_ADI)
 # --- TASARIM (CSS) ---
 st.markdown(f"""
     <style>
+    /* Streamlit öğelerini gizle */
     header, footer, .stDeployButton {{visibility: hidden !important;}}
     .block-container {{padding: 0px !important; margin: 0px !important;}}
     
@@ -30,58 +31,69 @@ st.markdown(f"""
         background-repeat: no-repeat;
         height: 100vh;
         width: 100vw;
-        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }}
 
+    /* Karartma katmanı */
     .stApp::before {{
         content: "";
         position: absolute;
         top: 0; left: 0; width: 100%; height: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
+        background-color: rgba(0, 0, 0, 0.4);
         z-index: 0;
     }}
 
+    /* ANA KONTEYNER */
     .main-container {{
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        text-align: center;
-        width: 100%;
         z-index: 10;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
     }}
 
     .mettot-header {{
         color: white;
         font-family: 'Courier New', Courier, monospace;
         font-weight: bold;
-        text-shadow: 2px 2px 15px rgba(0,0,0,1);
-        margin-bottom: 20px;
+        text-shadow: 2px 2px 10px rgba(0,0,0,1);
+        text-align: center;
+        margin-bottom: 25px;
     }}
 
     .my-button {{
-        background-color: rgba(255, 255, 255, 0.1);
+        background-color: rgba(0, 0, 0, 0.6); /* Butonları biraz daha belirgin yaptık */
         color: white !important;
-        border: 2px solid white;
-        border-radius: 10px;
+        border: 1px solid rgba(255,255,255,0.5);
+        border-radius: 8px;
         text-decoration: none !important;
         font-weight: bold;
+        text-align: center;
         transition: 0.3s;
-        backdrop-filter: blur(5px);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin: 10px auto;
+        display: block;
+        margin: 8px 0;
     }}
 
+    /* BİLGİSAYAR AYARI */
     @media (min-width: 769px) {{
-        .mettot-header {{ font-size: 80px; }}
-        .my-button {{ font-size: 22px; padding: 15px 40px; width: 250px; }}
+        .mettot-header {{ font-size: 70px; }}
+        .my-button {{ font-size: 20px; padding: 15px 40px; width: 300px; }}
     }}
 
+    /* MOBİL AYARI - Her şeyi aşağı kaydırdık ve küçülttük */
     @media (max-width: 768px) {{
-        .mettot-header {{ font-size: 45px; }}
-        .my-button {{ font-size: 18px; padding: 12px 0; width: 75%; }}
+        .main-container {{
+            margin-top: -100px; /* İçeriği biraz yukarı veya aşağı almak için burayı değiştirebilirsin */
+        }}
+        .mettot-header {{ font-size: 40px; }}
+        .my-button {{ 
+            font-size: 16px; 
+            padding: 14px 0; 
+            width: 85%; /* Butonlar ekrana daha iyi yayılır */
+        }}
     }}
     </style>
 
