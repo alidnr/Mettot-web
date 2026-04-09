@@ -1,71 +1,94 @@
-# --- TASARIM VE KESİN MERKEZLEME (CSS) ---
+import streamlit as st
+import base64
+
+# --- SAYFA AYARLARI ---
+st.set_page_config(page_title="Mettot-Sx", layout="wide")
+
+# --- ARKA PLAN FOTOĞRAFI FONKSİYONU ---
+FOTOGRAF_ADI = "image_9.png.jpeg"
+
+def get_base64(bin_file):
+    try:
+        with open(bin_file, 'rb') as f:
+            data = f.read()
+        return base64.b64encode(data).decode()
+    except:
+        return ""
+
+img_base64 = get_base64(FOTOGRAF_ADI)
+
+# --- TASARIM (CSS) ---
 st.markdown(f"""
     <style>
     header, footer, .stDeployButton {{visibility: hidden !important;}}
+    .block-container {{padding: 0px !important; margin: 0px !important;}}
     
     .stApp {{
-        background-image: url("data:image/jpeg;base64,{bin_str if bin_str else ""}");
+        background-image: url("data:image/jpeg;base64,{img_base64}");
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
-        background-attachment: fixed; /* Mobilde fotoğrafın kaymasını engeller */
+        height: 100vh;
+        width: 100vw;
+        overflow: hidden;
+    }}
+
+    .stApp::before {{
+        content: "";
+        position: absolute;
+        top: 0; left: 0; width: 100%; height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 0;
     }}
 
     .main-container {{
-        position: fixed;
+        position: absolute;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
         text-align: center;
-        width: 90%; /* Mobilde kenarlardan boşluk bırakır */
+        width: 100%;
         z-index: 10;
     }}
 
-    /* BİLGİSAYAR İÇİN AYARLAR (Büyük Ekran) */
     .mettot-header {{
         color: white;
-        font-size: 80px; 
         font-family: 'Courier New', Courier, monospace;
         font-weight: bold;
-        margin-bottom: 30px;
-        text-shadow: 5px 5px 20px rgba(0,0,0,1);
+        text-shadow: 2px 2px 15px rgba(0,0,0,1);
+        margin-bottom: 20px;
     }}
 
     .my-button {{
-        background-color: rgba(0,0,0,0.7);
+        background-color: rgba(255, 255, 255, 0.1);
         color: white !important;
-        padding: 15px 35px;
         border: 2px solid white;
-        border-radius: 12px;
+        border-radius: 10px;
         text-decoration: none !important;
-        font-size: 24px;
         font-weight: bold;
-        display: inline-block;
-        margin: 10px;
         transition: 0.3s;
+        backdrop-filter: blur(5px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 10px auto;
     }}
 
-    /* MOBİL İÇİN ÖZEL AYARLAR (Ekran 768px'den küçükse burası çalışır) */
-    @media only screen and (max-width: 768px) {{
-        .mettot-header {{
-            font-size: 45px; /* Başlığı mobilde küçülttük ki sığsın */
-        }}
-        .my-button {{
-            font-size: 18px; /* Buton yazılarını küçülttük */
-            padding: 12px 25px;
-            display: block; /* Butonları alt alta sıralar (daha kolay tıklanır) */
-            margin: 10px auto;
-            width: 80%; /* Butonlar genişlesin */
-        }}
+    @media (min-width: 769px) {{
+        .mettot-header {{ font-size: 80px; }}
+        .my-button {{ font-size: 22px; padding: 15px 40px; width: 250px; }}
+    }}
+
+    @media (max-width: 768px) {{
+        .mettot-header {{ font-size: 45px; }}
+        .my-button {{ font-size: 18px; padding: 12px 0; width: 75%; }}
     }}
     </style>
 
     <div class="main-container">
         <div class="mettot-header">< METTOT ></div>
-        <div class="button-group">
-            <a href="http://spotify.com" target="_blank" class="my-button">Spotify</a>
-            <a href="https://www.instagram.com/enessjordan" target="_blank" class="my-button">Instagram</a>
-            <a href="https://youtube.com/@mettot-sx" target="_blank" class="my-button">YouTube</a>
-        </div>
+        <a href="https://open.spotify.com" target="_blank" class="my-button">Spotify</a>
+        <a href="https://www.instagram.com/enessjordan" target="_blank" class="my-button">Instagram</a>
+        <a href="https://youtube.com/@mettot-sx" target="_blank" class="my-button">YouTube</a>
     </div>
 """, unsafe_allow_html=True)
