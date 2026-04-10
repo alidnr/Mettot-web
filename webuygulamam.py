@@ -1,34 +1,23 @@
 import streamlit as st
-import base64
 
 # --- SAYFA AYARLARI ---
 st.set_page_config(page_title="Mettot-Sx", layout="wide")
 
-# Fotoğrafı hızlıca yüklemek için cache kullanıyoruz
-@st.cache_data
-def get_base64(bin_file):
-    try:
-        with open(bin_file, 'rb') as f:
-            data = f.read()
-        return base64.b64encode(data).decode()
-    except:
-        return ""
-
-# --- DOSYA ADI ---
-# GitHub'da yaptığın yeni isim:
-FOTOGRAF_ADI = "arka_plan.webp" 
-img_base64 = get_base64(FOTOGRAF_ADI)
-
 # --- TASARIM (CSS) ---
 st.markdown(f"""
     <style>
-    /* Gereksiz öğeleri gizle */
+    /* Streamlit'in kendi yazılarını ve boşluklarını temizle */
     header, footer, .stDeployButton {{visibility: hidden !important;}}
     .block-container {{padding: 0px !important; margin: 0px !important;}}
     
     .stApp {{
+        /* Fotoğrafı ImgBB'deki doğrudan linkinden çekiyoruz */
         background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
-                    url("data:image/webp;base64,{img_base64}") center center / cover no-repeat fixed;
+                    url("https://i.ibb.co/p6V085XF/arka-plan.webp");
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
         height: 100vh;
         width: 100vw;
         display: flex;
@@ -69,14 +58,14 @@ st.markdown(f"""
         align-items: center;
         justify-content: center;
         margin: 12px auto;
-        backdrop-filter: blur(8px); /* Cam efekti */
+        backdrop-filter: blur(8px);
     }}
 
-    /* Üzerine gelince (Hover) Efekti */
+    /* Buton parlama ve büyüme efekti */
     .my-button:hover {{
         background-color: rgba(255, 255, 255, 0.25);
         border-color: white;
-        transform: scale(1.05); /* Hafif büyüme */
+        transform: scale(1.05);
         box-shadow: 0px 0px 25px rgba(255, 255, 255, 0.3);
     }}
 
@@ -93,7 +82,7 @@ st.markdown(f"""
 
     <div class="main-container">
         <div class="mettot-header">< METTOT ></div>
-        <a href="https://open.spotify.com/user/317v2hsvtq663pbeogbpg25ha" target="_blank" class="my-button">Spotify</a>
+        <a href="https://open.spotify.com/artist/6xi4UQoVjPLTld9Fu12736?si=xne1GWFqQQeQaEJV5alviQ" target="_blank" class="my-button">Spotify</a>
         <a href="https://www.instagram.com/enessjordan" target="_blank" class="my-button">Instagram</a>
         <a href="https://youtube.com/@mettot-sx" target="_blank" class="my-button">YouTube</a>
     </div>
