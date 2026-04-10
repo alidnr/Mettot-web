@@ -1,39 +1,31 @@
 import streamlit as st
-import base64
 
-# Sayfa ayarlarını en başta yap
+# --- SAYFA AYARLARI ---
 st.set_page_config(page_title="Mettot-Sx", layout="wide")
 
-# Fotoğrafı yükleyen fonksiyon (Hızlı cacheleme için optimize edildi)
-@st.cache_data
-def get_base64(bin_file):
-    with open(bin_file, 'rb') as f:
-        return base64.b64encode(f.read()).decode()
+# RESMİN DOĞRUDAN LİNKİ (Hızlı yükleme için)
+RESIM_URL = "https://i.ibb.co/Fkqwf5xF/image-9-png.jpg"
 
-# --- ARKA PLAN FOTOĞRAFI ---
-# ÖNEMLİ: image_9.png.jpeg dosyasını sıkıştırıp WebP yaparsan çok daha hızlı olur!
-try:
-    img_base64 = get_base64("image_9.png.jpeg")
-except:
-    img_base64 = ""
-
-# --- TASARIM ---
+# --- TASARIM (CSS) ---
 st.markdown(f"""
     <style>
-    /* CSS render hızını artırmak için sadeleştirildi */
+    /* Streamlit bileşenlerini tamamen gizle */
     header, footer, .stDeployButton {{display: none !important;}}
-    .block-container {{padding: 0px !important;}}
+    .block-container {{padding: 0px !important; margin: 0px !important;}}
     
+    /* Arka plan ayarı - En hızlı yöntem */
     .stApp {{
-        background: linear-gradient(rgba(0,0,0,0.25), rgba(0,0,0,0.25)), 
-                    url("data:image/jpeg;base64,{img_base64}") center center / cover no-repeat fixed;
+        background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), 
+                    url("{RESIM_URL}") center center / cover no-repeat fixed;
         height: 100vh;
         width: 100vw;
     }}
 
+    /* Ana konteyner - Tam orta */
     .main-container {{
         position: fixed;
-        top: 50%; left: 50%;
+        top: 50%;
+        left: 50%;
         transform: translate(-50%, -50%);
         width: 100%;
         z-index: 10;
@@ -45,37 +37,47 @@ st.markdown(f"""
 
     .mettot-header {{
         color: white;
-        font-family: 'Courier New', monospace;
-        font-size: 42px;
+        font-family: 'Courier New', Courier, monospace;
         font-weight: bold;
-        text-shadow: 2px 2px 10px rgba(0,0,0,0.8);
-        margin-bottom: 20px;
+        text-shadow: 2px 2px 15px rgba(0,0,0,1);
+        margin-bottom: 30px;
     }}
 
+    /* Profesyonel Cam (Glassmorphism) Butonlar */
     .my-button {{
-        background-color: rgba(0, 0, 0, 0.5);
+        background-color: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
         color: white !important;
-        border: 1px solid white;
-        border-radius: 10px;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        border-radius: 12px;
         text-decoration: none !important;
         font-weight: bold;
-        padding: 14px 0;
-        width: 80%;
-        max-width: 320px;
-        margin: 8px auto;
-        display: block;
-        transition: transform 0.2s, background 0.2s;
+        transition: 0.3s all ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 12px auto;
     }}
 
-    /* Hover (Üzerine gelince parlama) efekti ekledik - Profesyonel dokunuş */
+    /* Hover (Üzerine gelince parlatma ve büyütme) */
     .my-button:hover {{
-        background-color: rgba(255, 255, 255, 0.2);
+        background-color: rgba(255, 255, 255, 0.25);
+        border: 1px solid white;
         transform: scale(1.05);
+        box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.2);
     }}
 
+    /* Masaüstü ayarı */
     @media (min-width: 769px) {{
-        .mettot-header {{ font-size: 75px; }}
-        .my-button {{ width: 300px; padding: 15px 0; }}
+        .mettot-header {{ font-size: 80px; }}
+        .my-button {{ font-size: 22px; padding: 18px 0; width: 340px; }}
+    }}
+
+    /* Mobil ayarı */
+    @media (max-width: 768px) {{
+        .mettot-header {{ font-size: 48px; }}
+        .my-button {{ font-size: 18px; padding: 15px 0; width: 85%; }}
     }}
     </style>
 
