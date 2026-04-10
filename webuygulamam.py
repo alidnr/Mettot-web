@@ -1,83 +1,74 @@
 import streamlit as st
 
-# --- SAYFA AYARLARI ---
+# Sayfa ayarlarını ve ikonunu en başta belirle
 st.set_page_config(page_title="Mettot-Sx", layout="wide")
 
-# --- TASARIM (CSS) ---
-st.markdown(f"""
+# CSS - Hız için optimize edildi
+st.markdown("""
     <style>
-    /* Streamlit'in kendi yazılarını ve boşluklarını temizle */
-    header, footer, .stDeployButton {{visibility: hidden !important;}}
-    .block-container {{padding: 0px !important; margin: 0px !important;}}
+    /* Gereksiz Streamlit öğelerini tamamen yok et */
+    header, footer, .stDeployButton {display: none !important;}
+    .block-container {padding: 0px !important;}
     
-    .stApp {{
-        /* Fotoğrafı ImgBB'deki doğrudan linkinden çekiyoruz */
-        background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
-                    url("https://i.ibb.co/p6V085XF/arka-plan.webp");
+    .stApp {
+        /* BURAYA ImgBB'DEN ALDIĞIN DİREKT LİNKİ YAPIŞTIRIRSAN ÇOK DAHA HIZLI OLUR */
+        /* Örnek: url("https://i.ibb.co/xxxx/arka-plan.webp") */
+        background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+                    url("https://raw.githubusercontent.com/alidnr/Mettot-web/main/arka_plan.webp");
         background-size: cover;
-        background-position: center center;
+        background-position: center;
         background-repeat: no-repeat;
         background-attachment: fixed;
         height: 100vh;
-        width: 100vw;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }}
+    }
 
-    .main-container {{
+    .main-container {
         position: fixed;
         top: 50%; left: 50%;
         transform: translate(-50%, -50%);
         width: 100%;
-        z-index: 10;
+        text-align: center;
         display: flex;
         flex-direction: column;
         align-items: center;
-        text-align: center;
-    }}
+    }
 
-    .mettot-header {{
+    .mettot-header {
         color: white;
         font-family: 'Courier New', monospace;
+        font-size: 80px;
         font-weight: bold;
         text-shadow: 2px 2px 20px rgba(0,0,0,1);
         margin-bottom: 30px;
         letter-spacing: 5px;
-    }}
+    }
 
-    .my-button {{
+    .my-button {
         background-color: rgba(255, 255, 255, 0.1);
         color: white !important;
-        border: 1.5px solid rgba(255, 255, 255, 0.4);
+        border: 1px solid rgba(255, 255, 255, 0.4);
         border-radius: 15px;
         text-decoration: none !important;
         font-weight: bold;
-        transition: 0.4s ease;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin: 12px auto;
+        padding: 18px 0;
+        width: 350px;
+        margin: 10px auto;
+        display: block;
+        transition: 0.3s;
         backdrop-filter: blur(8px);
-    }}
+    }
 
-    /* Buton parlama ve büyüme efekti */
-    .my-button:hover {{
-        background-color: rgba(255, 255, 255, 0.25);
-        border-color: white;
+    .my-button:hover {
+        background-color: rgba(255, 255, 255, 0.2);
         transform: scale(1.05);
-        box-shadow: 0px 0px 25px rgba(255, 255, 255, 0.3);
-    }}
+        box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.3);
+    }
 
-    @media (min-width: 769px) {{
-        .mettot-header {{ font-size: 85px; }}
-        .my-button {{ font-size: 22px; padding: 18px 0; width: 350px; }}
-    }}
-
-    @media (max-width: 768px) {{
-        .mettot-header {{ font-size: 48px; }}
-        .my-button {{ font-size: 20px; padding: 16px 0; width: 85%; }}
-    }}
+    /* Mobil Ayarı */
+    @media (max-width: 768px) {
+        .mettot-header { font-size: 45px; }
+        .my-button { width: 80%; padding: 15px 0; }
+    }
     </style>
 
     <div class="main-container">
